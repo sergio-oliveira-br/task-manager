@@ -16,6 +16,7 @@ public class Task {
     private String status;
     private LocalDateTime createdAt;
 
+    //Vincula uma tarefa a um usuário, e permite que um usuário tenha várias tarefas.
     @ManyToOne
     private User user;
 
