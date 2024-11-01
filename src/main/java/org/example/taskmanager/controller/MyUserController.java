@@ -19,10 +19,4 @@ public class MyUserController {
         this.myUserService = myUserService;
     }
 
-    @PostMapping
-    public ResponseEntity<MyUser> createUser(@RequestBody MyUser myUser) {
-
-        MyUser newMyUser = myUserService.saveUser(myUser);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newMyUser);
-    }
 }
