@@ -13,8 +13,4 @@ public class MyTaskService {
         this.myTaskRespository = myTaskRespository;
     }
 
-    //This method will save new task
-    public MyTask saveTask(MyTask myTask) {
-        return myTaskRespository.save(myTask);
-    }
 }
