@@ -17,10 +17,4 @@ public class MyTaskController {
         this.myTaskService = myTaskService;
     }
 
-    @PostMapping
-    public ResponseEntity<MyTask> createTask(@RequestBody MyTask myTask) {
-
-        MyTask myNewTask = myTaskService.saveTask(myTask);
-        return ResponseEntity.status(HttpStatus.CREATED).body(myNewTask);
-    }
 }
