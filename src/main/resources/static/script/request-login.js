@@ -10,29 +10,31 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     let password = document.getElementById('password').value;
     console.log('password: ', password);
 
+    // Captura o token CSRF do meta tag
+    const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+
     try{
         let response = await fetch('/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                [csrfHeader]: csrfToken
             },
-            body: JSON.stringify({username, password}),
-
+            body: new URLSearchParams({
+                username: username,
+                password: password
+            })
         });
         console.log('Este é o URL: ' + response.url);
         console.log('Response status: ', response.status); // Adicionado para ver o status da resposta
 
         if(response.ok){
             console.log("Status 200, a resposta: ",  response);
-
-            if(response.headers.get('content-type')?.includes('application/json'))
-            {
-                let data = await response.json();
-                console.log('Response OK -> Data: ', data);
-            }
         }
 
     }catch(err){
-        console.log(err);
+        console.log('Erro durante a requisiacao de acesso: ' + err);
     }
 })
