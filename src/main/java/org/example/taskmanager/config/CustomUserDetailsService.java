@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 
 //Para carregar o usuário e suas permissões do banco de dados, usando o UserDetailsService do Spring.
@@ -26,10 +27,18 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        System.out.println("Tentativa de acesso. Usuario: " + username);
+        Optional<MyUser> user = userRepository.findByUsername(username);
 
-        MyUser myUser = userRepository.findByUsername(username);
+        if (user.isEmpty()) {
+            throw new UsernameNotFoundException("Usuário não encontrado: " + username);
+        }
 
-        return new User(myUser.getUsername(), myUser.getPassword(), new ArrayList<>());
+        MyUser myUser = user.get();
+
+        return User.builder()
+                .username(myUser.getUsername())
+                .password(myUser.getPassword())
+                .roles(myUser.getUserProfile())  // Certifique-se de que o campo "role" existe em MyUser
+                .build();
     }
 }
