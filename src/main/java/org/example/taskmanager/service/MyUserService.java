@@ -21,7 +21,9 @@ public class MyUserService {
 
     public void registerUser (String username, String password) {
 
-        System.out.println("Registering user in service:" + username);
+        System.out.println("Registrando o usuario atraves do metodo de servicos... ");
+
+        System.out.println("Senha fornecida: " + password); // Cuidado com informações sensíveis
 
         MyUser myUser = new MyUser();
         myUser.setUsername(username);
@@ -29,21 +31,6 @@ public class MyUserService {
 
         userRepository.save(myUser);
 
-        System.out.println("User registered successfully");
-    }
-
-    // Este método verificar se o usuário existe e se a senha está correta
-    public boolean userDataChecker(String username, String password) {
-
-
-        Optional<MyUser> myUser = userRepository.findByUsername(username);
-
-        if (myUser.isPresent()) {
-            if (passwordEncoder.matches(password, myUser.get().getUserPassword())) {
-                System.out.println("User found" + myUser.get().getUsername());
-                return true;
-            }
-        }
-        return false;
+        System.out.println("User registered successfully: " + myUser);
     }
 }
