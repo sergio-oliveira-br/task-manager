@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -35,10 +34,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         MyUser myUser = user.get();
 
-        return User.builder()
-                .username(myUser.getUsername())
-                .password(myUser.getPassword())
-                .roles(myUser.getUserProfile())  // Certifique-se de que o campo "role" existe em MyUser
-                .build();
+        System.out.println("\n");
+        System.out.println("Carregando Usuario: " + myUser);
+
+        return new User(
+            myUser.getUsername(),
+            myUser.getPassword(),
+            myUser.getAuthorities()
+       );
     }
 }
