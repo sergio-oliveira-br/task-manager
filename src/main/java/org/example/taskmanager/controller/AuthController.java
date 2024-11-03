@@ -1,18 +1,20 @@
 package org.example.taskmanager.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping()
 public class AuthController {
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/test")
     public ResponseEntity<String> test() {
         System.out.println("Test endpoint was called!");
-        return ResponseEntity.ok("Test POSTMAN,  endpoint is working!");
+        return ResponseEntity.status(HttpStatus.IM_USED).body("Test endpoint was called!");
     }
 
 }
