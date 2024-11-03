@@ -17,4 +17,16 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.IM_USED).body("Test endpoint was called!");
     }
 
+    @GetMapping("/logout-manual")
+    public String logoutManual(HttpServletRequest request) {
+        System.out.println("Logout Manual Request: " + request.getRequestURI() + ", " + request);
+
+        // Invalidar a sessão manualmente
+        request.getSession().invalidate();
+
+        // Limpar o contexto de segurança
+        SecurityContextHolder.clearContext();
+
+        return "redirect:/login?logout=true";
+    }
 }
