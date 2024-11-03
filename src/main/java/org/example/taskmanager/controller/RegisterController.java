@@ -20,7 +20,7 @@ public class RegisterController {
     @PostMapping
     public ResponseEntity<String> register(@RequestParam String username, @RequestParam String password) {
 
-        System.out.println("Registering user " + username + " with password " + password);
+        System.out.println("Iniciando a criacao do user " + username + " with password " + password);
         try{
             myUserService.registerUser(username, password);
             System.out.println("User registered successfully");
