@@ -31,12 +31,12 @@ public class MyUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "";
+        return userPassword;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return this.username;
     }
 
     @Override
@@ -87,5 +87,13 @@ public class MyUser implements UserDetails {
         this.userProfile = userProfile;
     }
 
-
+    @Override
+    public String toString() {
+        return "MyUser{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userProfile='" + userProfile + '\'' +
+                '}';
+    }
 }
