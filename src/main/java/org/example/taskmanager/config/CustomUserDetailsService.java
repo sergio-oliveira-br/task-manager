@@ -26,16 +26,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
+        System.out.println("Procurando o Usuário: " + username);
         Optional<MyUser> user = userRepository.findByUsername(username);
 
         if (user.isEmpty()) {
-            throw new UsernameNotFoundException("Usuário não encontrado: " + username);
+            throw new UsernameNotFoundException("Usuário " + username + " não encontrado");
         }
 
+        System.out.println("Usuário não é nulo.");
         MyUser myUser = user.get();
-
-        System.out.println("\n");
-        System.out.println("Carregando Usuario: " + myUser);
+        System.out.println("Procurando usuario: " + myUser);
 
         return new User(
             myUser.getUsername(),
