@@ -40,7 +40,7 @@ public class SecurityConfig {
             // Inicia a definição das regras de autorização.
             .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                 // Permite acesso irrestrito a qualquer recurso neste endpoit
-                .requestMatchers("/register.html", "/login.html").permitAll()
+                .requestMatchers("/register.html", "/login.html", "/").permitAll()
                 .requestMatchers("/login", "/register").permitAll()
 
                 // Restringe o acesso a qualquer recurso neste endpoit
